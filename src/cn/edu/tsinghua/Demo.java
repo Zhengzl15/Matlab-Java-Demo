@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -17,8 +19,13 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public class Demo {
+public class Demo implements ActionListener {
 	private JFrame mainFrame;
+	JButton calbutton;
+	JButton flybutton;
+	JTextField latitudeinput;
+	JTextField longitudeinput;
+	JTextField altitudeinput;
 	
 	public Demo () {}
 	
@@ -45,9 +52,9 @@ public class Demo {
 		sender.add(latitude);
 		sender.add(longitude);
 		sender.add(altitude);
-		JTextField latitudeinput = new JTextField(100);
-		JTextField longitudeinput = new JTextField(100);
-		JTextField altitudeinput = new JTextField(100);
+		latitudeinput = new JTextField(100);
+		longitudeinput = new JTextField(100);
+		altitudeinput = new JTextField(100);
 		sender.add(latitudeinput);
 		sender.add(longitudeinput);
 		sender.add(altitudeinput);
@@ -121,13 +128,15 @@ public class Demo {
 		
 		
 		JPanel calculator = new JPanel();
-		JButton cal = new JButton("弹道计算");
-		calculator.add(cal);
+		calbutton = new JButton("弹道计算");
+		calculator.add(calbutton);
+		calbutton.addActionListener(this);
 		mainFrame.getContentPane().add(calculator);
 		
 		JPanel flydemo = new JPanel();
-		JButton fly = new JButton("飞行演示");
-		flydemo.add(fly);
+		flybutton = new JButton("飞行演示");
+		flydemo.add(flybutton);
+		calbutton.addActionListener(this);
 		mainFrame.getContentPane().add(flydemo);
 				
 	}
@@ -136,4 +145,13 @@ public class Demo {
 		mainFrame.setVisible(true);
 	}
 	
+	public void actionPerformed(ActionEvent e){
+		Object temp = e.getSource();
+		if (temp == calbutton){
+
+		}
+		if (temp == flybutton){
+			
+		}
+	}
 }
