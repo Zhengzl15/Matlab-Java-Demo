@@ -2,13 +2,17 @@ package cn.edu.tsinghua;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -16,131 +20,116 @@ import javax.swing.border.LineBorder;
 public class Demo {
 	private JFrame mainFrame;
 	
-	//Category 1
-	private JLabel senderLongitudeLabel;
-	private JTextField senderLongitudeText;
-	private JLabel targetLongitudeLabel;
-	private JTextField targetLongitudeText;
-	private JButton trajectoryComputeBtn;
-	
-	//Category 2
-	private JLabel senderLatitudeLabel;
-	private JTextField senderLatitudeText;
-	private JLabel targetLatitudetudeLabel;
-	private JTextField targetLatitudeText;
-	private JButton onlineComputeBtn;
-	
-	//Category 3
-	private JLabel senderDegreeLabel;
-	private JTextField senderDegreeText;
-	private JLabel senderLongitudeLabel2;
-	private JTextField senderLongitudeText2;
-	private JButton sendingCompute;
-	
 	public Demo () {}
 	
 	public void init () {
-		mainFrame = new JFrame("Demo");
-		mainFrame.setSize(750, 500);
-		mainFrame.setLayout(null);
+		mainFrame = new JFrame("AirCraft");
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setResizable(false);
+		mainFrame.setSize(810, 460);
+		mainFrame.setLayout(new GridLayout(3,2,25,25));
 		
-		Container container = mainFrame.getContentPane();
 		
-		//Category 1
-		senderLongitudeLabel = new JLabel("发射点经度", JLabel.CENTER);
-		senderLongitudeLabel.setFont(new Font("Dialog", 0, 18));
-		senderLongitudeLabel.setLocation(60, 30);
-		senderLongitudeLabel.setOpaque(true);
-		senderLongitudeLabel.setBackground(new Color(255, 128, 64));
-		senderLongitudeLabel.setBounds(60, 30, 120, 50);
-		container.add(senderLongitudeLabel);
-		senderLongitudeText = new JTextField(100); //Max chars 100
-		senderLongitudeText.setLocation(60,  100);
-		senderLongitudeText.setBounds(60, 100, 120, 50);
-		container.add(senderLongitudeText);
-		targetLongitudeLabel = new JLabel("目标点经度", JLabel.CENTER);
-		targetLongitudeLabel.setFont(new Font("Dialog", 0, 18));
-		targetLongitudeLabel.setLocation(60, 170);
-		targetLongitudeLabel.setOpaque(true);
-		targetLongitudeLabel.setBackground(new Color(255, 128, 64));
-		targetLongitudeLabel.setBounds(60, 170, 120, 50);
-		container.add(targetLongitudeLabel);
-		targetLongitudeText = new JTextField(100); //Max chars 100
-		targetLongitudeText.setLocation(60,  240);
-		targetLongitudeText.setBounds(60, 240, 120, 50);
-		container.add(targetLongitudeText);
-		trajectoryComputeBtn = new JButton("弹道计算");
-		trajectoryComputeBtn.setFont(new Font("Dialog", 0, 18));
-		//trajectoryComputeBtn.setOpaque(true);
-		//trajectoryComputeBtn.setBackground(Color.blue);
-		//Border b = new LineBorder(Color.blue, 1);
-		//trajectoryComputeBtn.setBorder(b);
-		trajectoryComputeBtn.setLocation(60, 360);
-		trajectoryComputeBtn.setBounds(60, 360, 120, 50);
-		container.add(trajectoryComputeBtn);
-
-		//Category 2
-		senderLatitudeLabel = new JLabel("发射点纬度", JLabel.CENTER);
-		senderLatitudeLabel.setFont(new Font("Dialog", 0, 18));
-		senderLatitudeLabel.setLocation(300, 30);
-		senderLatitudeLabel.setOpaque(true);
-		senderLatitudeLabel.setBackground(new Color(255, 128, 64));
-		senderLatitudeLabel.setBounds(300, 30, 120, 50);
-		container.add(senderLatitudeLabel);
-		senderLatitudeText = new JTextField(100); //Max chars 100
-		senderLatitudeText.setLocation(300,  100);
-		senderLatitudeText.setBounds(300, 100, 120, 50);
-		container.add(senderLatitudeText);
-		targetLatitudetudeLabel = new JLabel("目标点纬度", JLabel.CENTER);
-		targetLatitudetudeLabel.setFont(new Font("Dialog", 0, 18));
-		targetLatitudetudeLabel.setLocation(300, 170);
-		targetLatitudetudeLabel.setOpaque(true);
-		targetLatitudetudeLabel.setBackground(new Color(255, 128, 64));
-		targetLatitudetudeLabel.setBounds(300, 170, 120, 50);
-		container.add(targetLatitudetudeLabel);
-		targetLatitudeText = new JTextField(100); //Max chars 100
-		targetLatitudeText.setLocation(300,  240);
-		targetLatitudeText.setBounds(300, 240, 120, 50);
-		container.add(targetLatitudeText);
-		onlineComputeBtn = new JButton("在线计算");
-		onlineComputeBtn.setFont(new Font("Dialog", 0, 18));
-		//onlineComputeBtn.setOpaque(true);
-		//onlineComputeBtn.setBackground(Color.blue);
-		onlineComputeBtn.setLocation(300, 360);
-		onlineComputeBtn.setBounds(300, 360, 120, 50);
-		container.add(onlineComputeBtn);
+		JPanel sender = new JPanel();
+		sender.setLayout(new GridLayout(3,3,10,10));
+		sender.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+		JLabel sendername = new JLabel("发射点", JLabel.CENTER);
+		JLabel nul1 = new JLabel("",JLabel.CENTER);
+		JLabel nul2 = new JLabel("",JLabel.CENTER);
+		sender.add(sendername);
+		sender.add(nul1);
+		sender.add(nul2);
+		JLabel latitude = new JLabel("纬度", JLabel.CENTER);
+		JLabel longitude = new JLabel("经度", JLabel.CENTER);
+		JLabel altitude = new JLabel("高度", JLabel.CENTER);
+		sender.add(latitude);
+		sender.add(longitude);
+		sender.add(altitude);
+		JTextField latitudeinput = new JTextField(100);
+		JTextField longitudeinput = new JTextField(100);
+		JTextField altitudeinput = new JTextField(100);
+		sender.add(latitudeinput);
+		sender.add(longitudeinput);
+		sender.add(altitudeinput);
+		mainFrame.getContentPane().add(sender);
 		
-		//Category 3
-		senderDegreeLabel = new JLabel("发射方位角", JLabel.CENTER);
-		senderDegreeLabel.setFont(new Font("Dialog", 0, 18));
-		senderDegreeLabel.setLocation(540, 30);
-		senderDegreeLabel.setOpaque(true);
-		senderDegreeLabel.setBackground(new Color(255, 128, 64));
-		senderDegreeLabel.setBounds(540, 30, 120, 50);
-		container.add(senderDegreeLabel);
-		senderDegreeText = new JTextField(100); //Max chars 100
-		senderDegreeText.setLocation(540,  100);
-		senderDegreeText.setBounds(540, 100, 120, 50);
-		container.add(senderDegreeText);
-		senderLongitudeLabel2 = new JLabel("发射点经度", JLabel.CENTER);
-		senderLongitudeLabel2.setFont(new Font("Dialog", 0, 18));
-		senderLongitudeLabel2.setLocation(540, 170);
-		senderLongitudeLabel2.setOpaque(true);
-		senderLongitudeLabel2.setBackground(new Color(255, 128, 64));
-		senderLongitudeLabel2.setBounds(540, 170, 120, 50);
-		container.add(senderLongitudeLabel2);
-		senderLongitudeText2 = new JTextField(100); //Max chars 100
-		senderLongitudeText2.setLocation(540,  240);
-		senderLongitudeText2.setBounds(540, 240, 120, 50);
-		container.add(senderLongitudeText2);
-		sendingCompute = new JButton("数据发送");
-		sendingCompute.setFont(new Font("Dialog", 0, 18));
-		//sendingCompute.setOpaque(true);
-		//sendingCompute.setBackground(Color.blue);
-		sendingCompute.setLocation(540, 360);
-		sendingCompute.setBounds(540, 360, 120, 50);
-		container.add(sendingCompute);
 		
+		JPanel noflyzone = new JPanel();
+		noflyzone.setLayout(new GridLayout(3,3,10,10));
+		noflyzone.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+		JLabel noflyzonename = new JLabel("禁飞区", JLabel.CENTER);
+		JLabel nul21 = new JLabel("",JLabel.CENTER);
+		JLabel nul22 = new JLabel("",JLabel.CENTER);
+		noflyzone.add(noflyzonename);
+		noflyzone.add(nul21);
+		noflyzone.add(nul22);
+		JLabel latitude2 = new JLabel("纬度", JLabel.CENTER);
+		JLabel longitude2 = new JLabel("经度", JLabel.CENTER);
+		JLabel altitude2 = new JLabel("高度", JLabel.CENTER);
+		noflyzone.add(latitude2);
+		noflyzone.add(longitude2);
+		noflyzone.add(altitude2);
+		JTextField latitudeinput2 = new JTextField(100);
+		JTextField longitudeinput2 = new JTextField(100);
+		JTextField altitudeinput2 = new JTextField(100);
+		noflyzone.add(latitudeinput2);
+		noflyzone.add(longitudeinput2);
+		noflyzone.add(altitudeinput2);
+		mainFrame.getContentPane().add(noflyzone);
+		
+		
+		JPanel receiver = new JPanel();
+		receiver.setLayout(new GridLayout(3,3,10,10));
+		receiver.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+		JLabel receivername = new JLabel("目标点", JLabel.CENTER);
+		JLabel nul31 = new JLabel("",JLabel.CENTER);
+		JLabel nul32 = new JLabel("",JLabel.CENTER);
+		receiver.add(receivername);
+		receiver.add(nul31);
+		receiver.add(nul32);
+		JLabel latitude3 = new JLabel("纬度", JLabel.CENTER);
+		JLabel longitude3 = new JLabel("经度", JLabel.CENTER);
+		JLabel altitude3 = new JLabel("高度", JLabel.CENTER);
+		receiver.add(latitude3);
+		receiver.add(longitude3);
+		receiver.add(altitude3);
+		JTextField latitudeinput3 = new JTextField(100);
+		JTextField longitudeinput3 = new JTextField(100);
+		JTextField altitudeinput3 = new JTextField(100);
+		receiver.add(latitudeinput3);
+		receiver.add(longitudeinput3);
+		receiver.add(altitudeinput3);
+		mainFrame.getContentPane().add(receiver);
+		
+		
+		JPanel flystyle = new JPanel();
+		flystyle.setLayout(new GridLayout(2,3,10,10));
+		flystyle.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+		JLabel flystylename = new JLabel("飞行构型", JLabel.CENTER);
+		JLabel nul41 = new JLabel("",JLabel.CENTER);
+		JLabel nul42 = new JLabel("",JLabel.CENTER);
+		flystyle.add(flystylename);
+		flystyle.add(nul41);
+		flystyle.add(nul42);
+		JRadioButton first=new JRadioButton("first");
+		JRadioButton second=new JRadioButton("second");
+		JRadioButton third=new JRadioButton("third");
+		flystyle.add(first);
+		flystyle.add(second);
+		flystyle.add(third);
+		mainFrame.getContentPane().add(flystyle);
+		
+		
+		JPanel calculator = new JPanel();
+		JButton cal = new JButton("弹道计算");
+		calculator.add(cal);
+		mainFrame.getContentPane().add(calculator);
+		
+		JPanel flydemo = new JPanel();
+		JButton fly = new JButton("飞行演示");
+		flydemo.add(fly);
+		mainFrame.getContentPane().add(flydemo);
+				
 	}
 	
 	public void run() {
