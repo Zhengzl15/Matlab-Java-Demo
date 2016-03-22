@@ -6,21 +6,61 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
-public class Demo {
+public class Demo{
 	private JFrame mainFrame;
+	JButton calbutton;
+	JButton flybutton;
+	JTextField latitudeinput;
+	JTextField longitudeinput;
+	JTextField altitudeinput;
+	JTextField latitudeinput2;
+	JTextField longitudeinput2;
+	JTextField altitudeinput2;
+	JTextField latitudeinput3;
+	JTextField longitudeinput3;
+	JTextField altitudeinput3;
 	
 	public Demo () {}
+	/*
+	public class MyRegExp extends PlainDocument {
+	    private Pattern pattern;
+	    private Matcher m;
+	    public MyRegExp(String pat) {
+	        super();
+	        this.pattern=Pattern.compile(pat);
+	    }
+	    @Override
+	    public void insertString
+	    (int offset, String str, AttributeSet attr)
+	            throws BadLocationException {   
+	        if (str == null){
+	            return;
+	        }
+	        String tmp=getText(0, offset).concat(str);
+	        m=pattern.matcher(tmp);
+	        if(m.matches())
+	            super.insertString(offset, str, attr);
+	    }
+	}*/
 	
 	public void init () {
 		mainFrame = new JFrame("AirCraft");
@@ -45,9 +85,10 @@ public class Demo {
 		sender.add(latitude);
 		sender.add(longitude);
 		sender.add(altitude);
-		JTextField latitudeinput = new JTextField(100);
-		JTextField longitudeinput = new JTextField(100);
-		JTextField altitudeinput = new JTextField(100);
+		latitudeinput = new JTextField(100);
+		//latitudeinput.setDocument(new MyRegExp("^[-+]?[0-9]+(\\.[0-9]+)?$"));
+		longitudeinput = new JTextField(100);
+		altitudeinput = new JTextField(100);
 		sender.add(latitudeinput);
 		sender.add(longitudeinput);
 		sender.add(altitudeinput);
@@ -69,9 +110,9 @@ public class Demo {
 		noflyzone.add(latitude2);
 		noflyzone.add(longitude2);
 		noflyzone.add(altitude2);
-		JTextField latitudeinput2 = new JTextField(100);
-		JTextField longitudeinput2 = new JTextField(100);
-		JTextField altitudeinput2 = new JTextField(100);
+		latitudeinput2 = new JTextField(100);
+		longitudeinput2 = new JTextField(100);
+		altitudeinput2 = new JTextField(100);
 		noflyzone.add(latitudeinput2);
 		noflyzone.add(longitudeinput2);
 		noflyzone.add(altitudeinput2);
@@ -93,9 +134,9 @@ public class Demo {
 		receiver.add(latitude3);
 		receiver.add(longitude3);
 		receiver.add(altitude3);
-		JTextField latitudeinput3 = new JTextField(100);
-		JTextField longitudeinput3 = new JTextField(100);
-		JTextField altitudeinput3 = new JTextField(100);
+		latitudeinput3 = new JTextField(100);
+		longitudeinput3 = new JTextField(100);
+		altitudeinput3 = new JTextField(100);
 		receiver.add(latitudeinput3);
 		receiver.add(longitudeinput3);
 		receiver.add(altitudeinput3);
@@ -121,13 +162,33 @@ public class Demo {
 		
 		
 		JPanel calculator = new JPanel();
-		JButton cal = new JButton("弹道计算");
-		calculator.add(cal);
+		calbutton = new JButton("弹道计算");
+		calculator.add(calbutton);
+		calbutton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String r = checkValidation();
+				if (!r.equals("")) {
+				JOptionPane.showMessageDialog(mainFrame, r, "提示", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
 		mainFrame.getContentPane().add(calculator);
 		
 		JPanel flydemo = new JPanel();
-		JButton fly = new JButton("飞行演示");
-		flydemo.add(fly);
+		flybutton = new JButton("飞行演示");
+		flydemo.add(flybutton);
+		flybutton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					String r = checkValidation();
+					if (!r.equals("")) {
+					JOptionPane.showMessageDialog(mainFrame, r, "提示", JOptionPane.WARNING_MESSAGE);
+					}
+			}
+		});
 		mainFrame.getContentPane().add(flydemo);
 				
 	}
@@ -136,4 +197,106 @@ public class Demo {
 		mainFrame.setVisible(true);
 	}
 	
+	public class CalListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("cal");		
+		}		
+	}
+	
+	//这个会调用两次。。
+	/*
+	public void actionPerformed(ActionEvent e){
+		Object temp = e.getSource();
+		if (e.getSource() == calbutton){
+			String r = checkValidation();
+			System.out.println("f");
+			if (!r.equals("")) {
+				//弹出警示框
+				JOptionPane.showMessageDialog(mainFrame, r, "提示", JOptionPane.WARNING_MESSAGE);
+			}
+		}
+		if (e.getSource() == flybutton){
+			System.out.println("fly");
+		}
+	}*/
+	
+	private String checkValidation() {
+		String result = "";
+		int count = 0;
+		
+		double la1Value = -999.0;
+		double lo1Value = -999.0;
+		double al1Value = -999.0;
+		double la3Value = -999.0;
+		double lo3Value = -999.0;
+		double al3Value = -999.0;
+		
+		//发射点
+		try {
+			la1Value = Double.parseDouble(latitudeinput.getText());
+		} catch (Exception e) {   //为空或者有字符时会发生异常
+			count++;
+			result = result + count + " : 发射点经度值应在-180~+180度间\n";
+		}
+		try {
+			lo1Value = Double.parseDouble(longitudeinput.getText());
+		} catch (Exception e) {
+			count++;
+			result = result + count + " : 发射点纬度值应在-180~+180度间\n";
+		}
+		try {
+			al1Value = Double.parseDouble(altitudeinput.getText());
+		} catch (Exception e) {
+			count++;
+			result = result + count + " : 发射点高程值应大于0\n";
+		}
+		
+		//目标点
+		try {
+			la3Value = Double.parseDouble(latitudeinput3.getText());
+		} catch (Exception e) {
+			count++;
+			result = result + count + " : 目标点经度值应在-180~+180度间\n";
+		}
+		try {
+			lo3Value = Double.parseDouble(longitudeinput3.getText());
+		} catch (Exception e) {
+			count++;
+			result = result + count + " : 目标点纬度值应在-180~+180度间\n";
+		}
+		try {
+			al3Value = Double.parseDouble(altitudeinput3.getText());
+		} catch (Exception e) {
+			count++;
+			result = result + count + " : 目标点高程值应大于0";
+		}
+		
+		if ((la1Value + 999.0 > 0.0001) && Math.abs(la1Value) > 180) {
+			count++;
+			result = result + count + " : 发射点经度值应在-180~+180度间\n";
+		}
+		if ((lo1Value + 999.0 > 0.0001) && Math.abs(lo1Value) > 180) {
+			count++;
+			result = result + count + " : 发射点纬度值应在-180~+180度间\n";
+		}
+		if ((al1Value + 999.0 > 0.0001) && al1Value <= 0) {
+			count++;
+			result = result + count + " : 发射点高程值应大于0\n";
+		}
+		if ((la3Value + 999.0 > 0.0001) && Math.abs(la3Value) > 180) {
+			count++;
+			result = result + count + " : 目标点经度值应在-180~+180度间\n";
+		}
+		if ((lo3Value + 999.0 > 0.0001) && Math.abs(lo3Value) > 180) {
+			count++;
+			result = result + count + " : 目标点纬度值应在-180~+180度间\n";
+		}
+		if ((al3Value + 999.0 > 0.0001) && al3Value <= 0) {
+			count++;
+			result = result + count + " : 目标点高程值应大于0";
+		}
+		
+		return result;
+	}
 }
