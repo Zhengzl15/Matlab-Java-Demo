@@ -69,7 +69,6 @@ public class Demo{
 		mainFrame.setSize(810, 460);
 		mainFrame.setLayout(new GridLayout(3,2,25,25));
 		
-		
 		JPanel sender = new JPanel();
 		sender.setLayout(new GridLayout(3,3,10,10));
 		sender.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
@@ -94,7 +93,6 @@ public class Demo{
 		sender.add(altitudeinput);
 		mainFrame.getContentPane().add(sender);
 		
-		
 		JPanel noflyzone = new JPanel();
 		noflyzone.setLayout(new GridLayout(3,3,10,10));
 		noflyzone.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
@@ -117,7 +115,6 @@ public class Demo{
 		noflyzone.add(longitudeinput2);
 		noflyzone.add(altitudeinput2);
 		mainFrame.getContentPane().add(noflyzone);
-		
 		
 		JPanel receiver = new JPanel();
 		receiver.setLayout(new GridLayout(3,3,10,10));
@@ -142,7 +139,6 @@ public class Demo{
 		receiver.add(altitudeinput3);
 		mainFrame.getContentPane().add(receiver);
 		
-		
 		JPanel flystyle = new JPanel();
 		flystyle.setLayout(new GridLayout(2,3,10,10));
 		flystyle.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
@@ -160,13 +156,10 @@ public class Demo{
 		flystyle.add(third);
 		mainFrame.getContentPane().add(flystyle);
 		
-		
 		JPanel calculator = new JPanel();
 		calbutton = new JButton("弹道计算");
 		calculator.add(calbutton);
 		calbutton.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				String r = checkValidation();
 				if (!r.equals("")) {
@@ -180,8 +173,6 @@ public class Demo{
 		flybutton = new JButton("飞行演示");
 		flydemo.add(flybutton);
 		flybutton.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 					String r = checkValidation();
 					if (!r.equals("")) {
@@ -189,8 +180,7 @@ public class Demo{
 					}
 			}
 		});
-		mainFrame.getContentPane().add(flydemo);
-				
+		mainFrame.getContentPane().add(flydemo);	
 	}
 	
 	public void run() {
@@ -198,7 +188,6 @@ public class Demo{
 	}
 	
 	public class CalListener implements ActionListener {
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("cal");		
 		}		
@@ -237,13 +226,13 @@ public class Demo{
 			la1Value = Double.parseDouble(latitudeinput.getText());
 		} catch (Exception e) {   //为空或者有字符时会发生异常
 			count++;
-			result = result + count + " : 发射点经度值应在-180~+180度间\n";
+			result = result + count + " : 发射点纬度值应在-180~+180度间\n";
 		}
 		try {
 			lo1Value = Double.parseDouble(longitudeinput.getText());
 		} catch (Exception e) {
 			count++;
-			result = result + count + " : 发射点纬度值应在-180~+180度间\n";
+			result = result + count + " : 发射点经度值应在-180~+180度间\n";
 		}
 		try {
 			al1Value = Double.parseDouble(altitudeinput.getText());
@@ -257,13 +246,13 @@ public class Demo{
 			la3Value = Double.parseDouble(latitudeinput3.getText());
 		} catch (Exception e) {
 			count++;
-			result = result + count + " : 目标点经度值应在-180~+180度间\n";
+			result = result + count + " : 目标点纬度值应在-180~+180度间\n";
 		}
 		try {
 			lo3Value = Double.parseDouble(longitudeinput3.getText());
 		} catch (Exception e) {
 			count++;
-			result = result + count + " : 目标点纬度值应在-180~+180度间\n";
+			result = result + count + " : 目标点经度值应在-180~+180度间\n";
 		}
 		try {
 			al3Value = Double.parseDouble(altitudeinput3.getText());
@@ -274,11 +263,11 @@ public class Demo{
 		
 		if ((la1Value + 999.0 > 0.0001) && Math.abs(la1Value) > 180) {
 			count++;
-			result = result + count + " : 发射点经度值应在-180~+180度间\n";
+			result = result + count + " : 发射点纬度值应在-180~+180度间\n";
 		}
 		if ((lo1Value + 999.0 > 0.0001) && Math.abs(lo1Value) > 180) {
 			count++;
-			result = result + count + " : 发射点纬度值应在-180~+180度间\n";
+			result = result + count + " : 发射点经度值应在-180~+180度间\n";
 		}
 		if ((al1Value + 999.0 > 0.0001) && al1Value <= 0) {
 			count++;
@@ -286,11 +275,11 @@ public class Demo{
 		}
 		if ((la3Value + 999.0 > 0.0001) && Math.abs(la3Value) > 180) {
 			count++;
-			result = result + count + " : 目标点经度值应在-180~+180度间\n";
+			result = result + count + " : 目标点纬度值应在-180~+180度间\n";
 		}
 		if ((lo3Value + 999.0 > 0.0001) && Math.abs(lo3Value) > 180) {
 			count++;
-			result = result + count + " : 目标点纬度值应在-180~+180度间\n";
+			result = result + count + " : 目标点经度值应在-180~+180度间\n";
 		}
 		if ((al3Value + 999.0 > 0.0001) && al3Value <= 0) {
 			count++;
