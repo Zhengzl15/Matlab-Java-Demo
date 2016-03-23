@@ -217,6 +217,9 @@ public class Demo{
 		double la1Value = -999.0;
 		double lo1Value = -999.0;
 		double al1Value = -999.0;
+		double la2Value = -999.0;
+		double lo2Value = -999.0;
+		double al2Value = -999.0;		
 		double la3Value = -999.0;
 		double lo3Value = -999.0;
 		double al3Value = -999.0;
@@ -228,17 +231,69 @@ public class Demo{
 			count++;
 			result = result + count + " : 发射点纬度值应在-180~+180度间\n";
 		}
+		if ((Math.abs(la1Value + 999.0) > 0.0001) && Math.abs(la1Value) > 180) {
+			count++;
+			result = result + count + " : 发射点纬度值应在-180~+180度间\n";
+		}
+		
 		try {
 			lo1Value = Double.parseDouble(longitudeinput.getText());
 		} catch (Exception e) {
 			count++;
 			result = result + count + " : 发射点经度值应在-180~+180度间\n";
 		}
+		if ((Math.abs(lo1Value + 999.0) > 0.0001) && Math.abs(lo1Value) > 180) {
+			count++;
+			result = result + count + " : 发射点经度值应在-180~+180度间\n";
+		}
+		
 		try {
 			al1Value = Double.parseDouble(altitudeinput.getText());
 		} catch (Exception e) {
 			count++;
 			result = result + count + " : 发射点高程值应大于0\n";
+		}
+		if ((Math.abs(al1Value + 999.0) > 0.0001) && al1Value <= 0) {
+			count++;
+			result = result + count + " : 发射点高程值应大于0\n";
+		}
+		
+		//禁飞区
+		if (!latitudeinput2.getText().isEmpty()) {
+			try {
+				la2Value = Double.parseDouble(latitudeinput2.getText());
+			} catch (Exception e) {
+				count++;
+				result = result + count + " : 禁飞区纬度值应在-180~+180度间\n";
+			}
+			if ((Math.abs(la2Value + 999.0) > 0.0001) && Math.abs(la2Value) > 180) {
+				count++;
+				result = result + count + " : 禁飞区纬度值应在-180~+180度间\n";
+			}
+		}
+		if (!longitudeinput2.getText().isEmpty()) {
+			try {
+				lo2Value = Double.parseDouble(longitudeinput2.getText());
+			} catch (Exception e) {
+				count++;
+				result = result + count + " : 禁飞区纬度值应在-180~+180度间\n";
+			}
+			if ((Math.abs(lo2Value + 999.0) > 0.0001) && Math.abs(lo2Value) > 180) {
+				count++;
+				result = result + count + " : 禁飞区纬度值应在-180~+180度间\n";
+			}
+		}
+		if (!altitudeinput2.getText().isEmpty()) {
+			try {
+				al2Value = Double.parseDouble(altitudeinput2.getText());
+			} catch (Exception e) {
+				count++;
+				result = result + count + " : 禁飞区高程值应大于0\n";
+			}
+			if ((Math.abs(al2Value + 999.0) > 0.0001) && al2Value <= 0) {
+				count++;
+				result = result + count + " : 禁飞区高程值应大于0\n";
+			}
 		}
 		
 		//目标点
@@ -248,40 +303,29 @@ public class Demo{
 			count++;
 			result = result + count + " : 目标点纬度值应在-180~+180度间\n";
 		}
+		if ((Math.abs(la3Value + 999.0) > 0.0001) && Math.abs(la3Value) > 180) {
+			count++;
+			result = result + count + " : 目标点纬度值应在-180~+180度间\n";
+		}
+		
 		try {
 			lo3Value = Double.parseDouble(longitudeinput3.getText());
 		} catch (Exception e) {
 			count++;
 			result = result + count + " : 目标点经度值应在-180~+180度间\n";
 		}
+		if ((Math.abs(lo3Value + 999.0) > 0.0001) && Math.abs(lo3Value) > 180) {
+			count++;
+			result = result + count + " : 目标点经度值应在-180~+180度间\n";
+		}
+
 		try {
 			al3Value = Double.parseDouble(altitudeinput3.getText());
 		} catch (Exception e) {
 			count++;
 			result = result + count + " : 目标点高程值应大于0\n";
 		}
-		
-		if ((la1Value + 999.0 > 0.0001) && Math.abs(la1Value) > 180) {
-			count++;
-			result = result + count + " : 发射点纬度值应在-180~+180度间\n";
-		}
-		if ((lo1Value + 999.0 > 0.0001) && Math.abs(lo1Value) > 180) {
-			count++;
-			result = result + count + " : 发射点经度值应在-180~+180度间\n";
-		}
-		if ((al1Value + 999.0 > 0.0001) && al1Value <= 0) {
-			count++;
-			result = result + count + " : 发射点高程值应大于0\n";
-		}
-		if ((la3Value + 999.0 > 0.0001) && Math.abs(la3Value) > 180) {
-			count++;
-			result = result + count + " : 目标点纬度值应在-180~+180度间\n";
-		}
-		if ((lo3Value + 999.0 > 0.0001) && Math.abs(lo3Value) > 180) {
-			count++;
-			result = result + count + " : 目标点经度值应在-180~+180度间\n";
-		}
-		if ((al3Value + 999.0 > 0.0001) && al3Value <= 0) {
+		if ((Math.abs(al3Value + 999.0) > 0.0001) && al3Value <= 0) {
 			count++;
 			result = result + count + " : 目标点高程值应大于0\n";
 		}
