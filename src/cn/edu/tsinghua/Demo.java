@@ -269,7 +269,7 @@ public class Demo{
 			al3Value = Double.parseDouble(altitudeinput3.getText());
 		} catch (Exception e) {
 			count++;
-			result = result + count + " : 目标点高程值应大于0";
+			result = result + count + " : 目标点高程值应大于0\n";
 		}
 		
 		if ((la1Value + 999.0 > 0.0001) && Math.abs(la1Value) > 180) {
@@ -294,7 +294,7 @@ public class Demo{
 		}
 		if ((al3Value + 999.0 > 0.0001) && al3Value <= 0) {
 			count++;
-			result = result + count + " : 目标点高程值应大于0";
+			result = result + count + " : 目标点高程值应大于0\n";
 		}
 		
 		return result;
